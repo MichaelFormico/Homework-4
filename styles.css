@@ -78,3 +78,11 @@ h4 {
     color: white;
 
 }
+.msg {
+    display: block;
+    min-height: 100px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: whitesmoke;
+  }
+  

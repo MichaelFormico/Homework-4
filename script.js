@@ -7,6 +7,11 @@ const right = document.getElementById('correct')
 const wrong = document.getElementById('incorrect')
 const startingMinutes = 2;
 const countdownEl = document.getElementById('countdown')
+let messagez = document.getElementById('message')
+let saveButton = document.getElementById('save')
+let namez = document.getElementById('name')
+let score = document.getElementById('score')
+let cards = document.getElementById('cards')
 let correctAnswers = "0"
 let time = startingMinutes * 60;
 let allQuestions, currentQuestionIndex
@@ -36,9 +41,9 @@ var countdowns = function updateCountdown() {
 function startGame() {
   startButton.classList.add('hide')
   header.classList.add('hide')
+  questionContainerElement.classList.remove('hide')
   allQuestions = questions
   currentQuestionIndex = 0
-  questionContainerElement.classList.remove('hide')
   countdowns()
   setNextQuestion()
 }
@@ -92,7 +97,7 @@ function selectAnswer(e) {
         // setNextQuestion()
         setTimeout(setNextQuestion, 500);
   } else {
-    homeScreen()
+    scoreboard()
   }
 }
 
@@ -115,6 +120,41 @@ function clearStatusClass() {
   right.classList.add('hide')
   wrong.classList.add('hide')
 }
+
+let saveClick = saveButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  score = (correctAnswers * 21)
+  let records = {
+    name: namez.value,
+    score: score,
+  }
+  localStorage.setItem("records", JSON.stringify(records));
+});
+
+var tally = function renderMessage() {
+  var lastScore = JSON.parse(localStorage.getItem("records"));
+  (messagez.innerText = lastScore.name + 
+    " scored " + lastScore.score + " points!");
+    messagez.classList.remove('hide')
+  }
+
+
+function scoreboard () {
+  startButton.innerText = "Restart"
+  startButton.classList.remove('hide')
+  header.classList.add('hide')
+  questionContainerElement.classList.add('hide')
+  cards.classList.remove('hide')
+  score.innerText = "Score = " + (correctAnswers * 21)
+  right.classList.add('hide')
+  wrong.classList.add('hide')
+  score = (correctAnswers * 21)
+  saveClick
+  tally()
+  
+}
+
+
 
 // These are the questions for the quiz which are pulled above.
 const questions = [
@@ -153,5 +193,4 @@ const questions = [
       { text: 'For Loops', correct: false },
       { text: 'Console Log', correct: true }
     ]
-  }
-]
+  }]
