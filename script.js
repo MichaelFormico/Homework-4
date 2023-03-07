@@ -7,6 +7,7 @@ const right = document.getElementById('correct')
 const wrong = document.getElementById('incorrect')
 const startingMinutes = 2;
 const countdownEl = document.getElementById('countdown')
+let correctAnswers = "0"
 let time = startingMinutes * 60;
 let allQuestions, currentQuestionIndex
 setInterval(countdowns, 1000)
@@ -98,6 +99,8 @@ function selectAnswer(e) {
 function setStatusClass(correct) {
   if (correct) {
     right.classList.remove('hide')
+    correctAnswers++;
+    console.log(correctAnswers)
       
   } else {
     wrong.classList.remove('hide')
