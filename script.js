@@ -42,6 +42,7 @@ function startGame() {
   startButton.classList.add('hide')
   header.classList.add('hide')
   questionContainerElement.classList.remove('hide')
+  cards.classList.add('hide')
   allQuestions = questions
   currentQuestionIndex = 0
   countdowns()
