@@ -15,7 +15,7 @@ let cards = document.getElementById('cards')
 let correctAnswers = "0"
 let time = startingMinutes * 60;
 let allQuestions, currentQuestionIndex
-setInterval(countdowns, 1000)
+let timeInterval;
 
 startButton.addEventListener('click', startGame)
 
@@ -45,7 +45,7 @@ function startGame() {
   cards.classList.add('hide')
   allQuestions = questions
   currentQuestionIndex = 0
-  countdowns()
+  timeInterval = setInterval(countdowns, 1000)
   setNextQuestion()
 }
 
@@ -98,6 +98,7 @@ function selectAnswer(e) {
         // setNextQuestion()
         setTimeout(setNextQuestion, 500);
   } else {
+    clearInterval(timeInterval)
     scoreboard()
   }
 }
